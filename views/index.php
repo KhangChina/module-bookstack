@@ -26,7 +26,7 @@
                         </h4>
                     </div>
                     <div class="panel-body">
-                        
+
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Mail đăng nhập</label>
-                                <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+                                <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email" value="<?= $email?>">
                                 <small id="emailHelp" class="form-text text-muted">Điền email đã đăng kí ở document</small>
                             </div>
                             <div class="form-group">

@@ -43,3 +43,11 @@ function bookstack_permissions(){
     ];
     register_staff_capabilities('bookstack', $capabilities, _l('Bookstack'));
 }
+
+register_activation_hook('bookstack', 'bookstack_module_activation_hook');
+
+function bookstack_module_activation_hook()
+{
+    $CI = &get_instance();
+    require_once(__DIR__ . '/install.php');
+}

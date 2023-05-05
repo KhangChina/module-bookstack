@@ -19,12 +19,29 @@ class Bookstack_models extends App_Model
             'password'    => $password,
             'staff_id' => $staff_id,
         ];
-
-        $check = $this->db->where('staff_id', $staff_id);
-        if($check)
+        $this->db->select('staff_id');
+        $this->db->where('staff_id',$staff_id);
+        $tracking = $this->db->get(db_prefix().'bookstack')->row();
+        if($tracking)
         {
-           return $this->db->update('bookstack', $data, array('staff_id' => $staff_id));
+            return $this->db->update('bookstack', $data,array('staff_id' => $staff_id));
         }
-       return $this->db->insert('bookstack', $data);
+        return $this->db->insert('bookstack', $data);
     }
+    public function getEmail($staff_id)
+    {
+        $this->db->select('email');
+        $this->db->where('staffid', $staff_id);
+        $tracking = $this->db->get(db_prefix().'staff')->row();
+        return $tracking->email;
+    }
+
+    public function getDataLogin($staff_id)
+    {
+        $this->db->select('email','password');
+        $this->db->where('staff_id', $staff_id);
+        $tracking = $this->db->get(db_prefix().'bookstack')->row();
+        return $tracking;
+    }
+    
 }
