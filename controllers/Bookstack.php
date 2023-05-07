@@ -17,7 +17,17 @@ class Bookstack extends AdminController
     //Chức năng chuyển trang
     public function index()
     {
-        $staff_id = get_staff_user_id();
+        $staff_id = get_staff_user_id(); 
+        //Step 1: Check data bookstack
+        $res = $this->bookstack_models->getDataLogin($staff_id);
+        if($res->email && $res->password)
+        {
+            $data['email'] =$res->email;
+            $data['check'] = true;
+            return $this->load->view('index', $data);
+        }
+        //Step 2: Get data portal
+        $data['check'] = false;
         $email = $this->bookstack_models->getEmail($staff_id);
         $data['email'] = $email;
         return $this->load->view('index', $data);
@@ -35,9 +45,9 @@ class Bookstack extends AdminController
     public function connect_document()
     {
         $staff_id = get_staff_user_id();
-        $data = $this->bookstack_models->getDataLogin($staff_id);
-        $email = $data->email;
-        $password = $data->password;
+        $res = $this->bookstack_models->getDataLogin($staff_id);
+        $email = $res->email;
+        $password = $res->password;
         if ($email && $password) {
             $data['username'] = $email;
             $data['password'] = $password;

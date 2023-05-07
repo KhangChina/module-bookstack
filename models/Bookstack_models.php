@@ -38,7 +38,7 @@ class Bookstack_models extends App_Model
 
     public function getDataLogin($staff_id)
     {
-        $this->db->select('email','password');
+        $this->db->select(['email','password']);
         $this->db->where('staff_id', $staff_id);
         $tracking = $this->db->get(db_prefix().'bookstack')->row();
         return $tracking;

@@ -6,7 +6,8 @@
         <div class="row">
             <div class="col-md-12 animated fadeIn">
                 <div class="_buttons tw-mb-2 sm:tw-mb-4">
-                    <a href="<?php echo admin_url('bookstack/connect_document'); ?>" class="btn btn-primary mright5">
+
+                    <a href="<?php echo admin_url('bookstack/connect_document'); ?>" class="btn btn-primary mright5 <?php if (!$check) echo 'disabled' ?>">
                         <i class="fa-solid fa-diamond-turn-right"></i>
                         <?php echo _l('Kết nối documents'); ?>
                     </a>
@@ -16,6 +17,15 @@
                         <i class="fa-sharp fa-solid fa-gear"></i>
                         <?php echo _l('Cấu hình'); ?>
                     </button>
+
+                    <?php
+                    if ($check) {
+                        echo '<i class="fa-sharp fa-solid fa-arrows-rotate"></i> Đã đồng bộ người dùng';
+                    } else {
+                        echo '<i class="fa-sharp fa-solid fa-arrows-rotate"></i> Chưa đồng bộ người dùng';
+                    }
+
+                    ?>
 
                 </div>
 
@@ -44,27 +54,27 @@
                 </h4>
             </div>
             <?php echo form_open(admin_url('bookstack/save_user')); ?>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Mail đăng nhập</label>
-                                <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email" value="<?= $email?>">
-                                <small id="emailHelp" class="form-text text-muted">Điền email đã đăng kí ở document</small>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Mật khẩu</label>
-                                <input type="password" class="form-control" name="password" placeholder="Password">
-                                <small id="emailHelp" class="form-text text-muted">Điền mật khẩu đã đăng kí ở document</small>
-                            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Mail đăng nhập</label>
+                            <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email" value="<?= $email ?>">
+                            <small id="emailHelp" class="form-text text-muted">Điền email đã đăng kí ở document</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Mật khẩu</label>
+                            <input type="password" class="form-control" name="password" placeholder="Password">
+                            <small id="emailHelp" class="form-text text-muted">Điền mật khẩu đã đăng kí ở document</small>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                    <button type="submit" class="btn btn-primary">Lưu</button>
-                </div>
-                <?php echo form_close(); ?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                <button type="submit" class="btn btn-primary">Lưu</button>
+            </div>
+            <?php echo form_close(); ?>
         </div>
     </div>
 </div>
