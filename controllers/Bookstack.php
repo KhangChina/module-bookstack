@@ -1,4 +1,6 @@
 <?php
+
+
 defined('BASEPATH') or exit('No direct script access allowed');
 /**
  * Bookstack Controller
@@ -20,7 +22,7 @@ class Bookstack extends AdminController
         $staff_id = get_staff_user_id(); 
         //Step 1: Check data bookstack
         $res = $this->bookstack_models->getDataLogin($staff_id);
-        if($res->email && $res->password)
+        if($res)
         {
             $data['email'] =$res->email;
             $data['check'] = true;
@@ -39,8 +41,16 @@ class Bookstack extends AdminController
         $staff_id = get_staff_user_id();
         $email = $postData["email"];
         $password = $postData["password"];
-        $this->bookstack_models->insert_login_bookstack($staff_id, $email, $password);
-        $this->index();
+        if(strlen($email) > 1 && strlen($password) > 1)
+        {
+            $this->bookstack_models->insert_login_bookstack($staff_id, $email, $password);
+            set_alert('success', _l('Lưu cấu hình thành công'));
+        }
+        else
+        {
+            set_alert('danger', _l('Thông tin cấu hình không chuẩn'));
+        }
+        redirect(admin_url('bookstack'));
     }
     public function connect_document()
     {
@@ -54,5 +64,9 @@ class Bookstack extends AdminController
             return $this->load->view('connect', $data);
         }
         $this->index(); 
+    }
+    public function guide()
+    {
+      return $this->load->view('bookstack-module-user-guide');
     }
 }

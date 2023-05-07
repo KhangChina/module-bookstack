@@ -36,7 +36,7 @@
                         </h4>
                     </div>
                     <div class="panel-body">
-
+                        <iframe class="col-md-12" style=" height: 2000px;" src=" <?= admin_url('bookstack/guide') ?>"></iframe>
                     </div>
                 </div>
             </div>
